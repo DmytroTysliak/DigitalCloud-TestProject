@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "CqLMT5y6jIk=",
+  "dgSpecHash": "58eByT2Tpko=",
   "success": true,
   "projectFilePath": "C:\\Tests\\Test_project\\Test_project\\Test_project.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Dmytro\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512"
+  ],
   "logs": []
 }

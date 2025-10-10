@@ -14,39 +14,16 @@ using Test_project.ViewModels;
 
 namespace Test_project
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private CurrencyViewModel viewModel;
+        public CurrencyViewModel CurrencyVM { get; set; }
         public MainWindow()
         {
             InitializeComponent();
 
-            viewModel = new CurrencyViewModel();
-            CurrenciesGrid.ItemsSource = viewModel.Currencies;
-            DataContext = viewModel;
-
-
+            CurrencyVM = new CurrencyViewModel();
+            DataContext = new MainViewModel();
         }
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.Add_Currency();
-        }
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            var selected = (Currency)CurrenciesGrid.SelectedItem;
-            viewModel.Delete_Currency(selected);
-        }
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            var selected = (Currency)CurrenciesGrid.SelectedItem;
-            viewModel.Edit_Currency(selected);
-        }
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            viewModel.Refresh_Currency();
-        }
+        
     }
 }

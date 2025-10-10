@@ -1,17 +1,26 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using Test_project.Models;
 
 namespace Test_project.ViewModels
 {
-    public class CurrencyViewModel
+    public class CurrencyViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<Currency> Currencies { get; set; }
+
+        public ICommand AddCurrencyCommand { get; }
+        public ICommand DeleteCurrencyCommand { get; }
+        public ICommand EditCurrencyCommand { get; }
+        public ICommand RefreshCurrencyCommand { get; }
 
         public CurrencyViewModel()
         {
@@ -21,6 +30,12 @@ namespace Test_project.ViewModels
                 new Currency("Euro", "EUR", 0.92m),
                 new Currency("Japanese Yen", "JPY", 144.5m)
             };
+
+            Currencies = new ObservableCollection<Currency>();
+            AddCurrencyCommand = new RelayCommand(Add_Currency);
+            DeleteCurrencyCommand = new RelayCommand<Currency>(Delete_Currency);
+            EditCurrencyCommand = new RelayCommand<Currency>(Edit_Currency);
+            RefreshCurrencyCommand = new RelayCommand(Refresh_Currency);
         }
         public void Add_Currency()
         {

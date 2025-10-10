@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test_project"
+        xmlns:Search_button="clr-namespace:Test_project.View.Search_button"
+        xmlns:Changes_buttons="clr-namespace:Test_project.View.Changes_buttons"
         mc:Ignorable="d"
         Title="MainPage" Height="450" Width="800">
     <StackPanel>
@@ -20,19 +22,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Пошук -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <TextBox x:Name="Search_box" Text="Enter your search" FontSize="20.5" Foreground="Gray" Width="300" HorizontalAlignment="Center" Padding="10"/>
-            <Button x:Name="Search_but" Content="Search" Width="100" HorizontalAlignment="Right" Margin="10" IsDefault="True" />
-        </StackPanel>
-        
-        <!-- Кнопки управління -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Button x:Name="Add" Content="Add" Width="80" Margin="5" Click="Add_Click"/>
-            <Button x:Name="Delete" Content="Delete" Width="80" Margin="5" Click="Delete_Click"/>
-            <Button x:Name="Edit" Content="Edit" Width="80" Margin="5" Click="Edit_Click"/>
-            <Button x:Name="Refresh" Content="Refresh" Width="80" Margin="5" Click="Refresh_Click"/>
-        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Search_button:Search Grid.Row ="1" Width="400" Height="60"/>
+        </Grid>
+
+
+
+        <Changes_buttons:Changes DataContext="{Binding CurrencyVM}" Width ="400" Height="60"/>
+
+
+
     </StackPanel>
 
 </Window>

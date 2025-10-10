@@ -19,3 +19,11 @@ C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\refint\Test_project.
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_project.pdb
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_project.genruntimeconfig.cache
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\ref\Test_project.dll
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\Search_button\Search.g.cs
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\Search_button\Search.baml
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\Changes_buttons\Changes.g.cs
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_project.csproj.AssemblyReference.cache
+C:\Tests\Test_project\Test_project\bin\Debug\net9.0-windows\CommunityToolkit.Mvvm.dll
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\Changes_buttons\Changes.baml
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_pro.9DA6EF3E.Up2Date
