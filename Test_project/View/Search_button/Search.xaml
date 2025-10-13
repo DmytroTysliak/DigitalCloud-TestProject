@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Test_project.View.Search_button.Search"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Test_project.View.Search_button"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="400">
+    <Grid  HorizontalAlignment="Center" Margin="0,10,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="Search_box" Width="398" Height="60" HorizontalAlignment="Center" FontSize="20" Padding="10" Margin="0,-10,0,0" TextChanged="Search_box_TextChanged"/>
+        <TextBlock x:Name="tbPlaceholder" Text="Enter your search" Foreground="DarkGray" FontSize="20" VerticalAlignment="Center" Padding="10" Margin="0,-10,0,0" IsHitTestVisible="False"/>
+        <Button x:Name="Search_but" Content="Search" Width="100" HorizontalAlignment="Left" Margin="288,5,0,15"  IsDefault="True" />
+    </Grid>
+</UserControl>
