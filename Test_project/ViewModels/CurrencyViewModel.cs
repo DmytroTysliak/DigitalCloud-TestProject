@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,7 +15,7 @@ namespace Test_project.ViewModels
 {
     public class CurrencyViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         public ObservableCollection<Currency> Currencies { get; set; }
 
         public ICommand AddCurrencyCommand { get; }
@@ -31,12 +32,20 @@ namespace Test_project.ViewModels
                 new Currency("Japanese Yen", "JPY", 144.5m)
             };
 
-            Currencies = new ObservableCollection<Currency>();
             AddCurrencyCommand = new RelayCommand(Add_Currency);
             DeleteCurrencyCommand = new RelayCommand<Currency>(Delete_Currency);
             EditCurrencyCommand = new RelayCommand<Currency>(Edit_Currency);
             RefreshCurrencyCommand = new RelayCommand(Refresh_Currency);
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
         public void Add_Currency()
         {
             Currencies.Add(new Currency("New Currency", "New", 0m));

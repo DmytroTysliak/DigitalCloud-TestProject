@@ -22,7 +22,7 @@ namespace Test_project
             InitializeComponent();
 
             CurrencyVM = new CurrencyViewModel();
-            DataContext = new MainViewModel();
+            DataContext = CurrencyVM;
         }
         
     }

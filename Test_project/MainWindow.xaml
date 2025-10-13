@@ -11,6 +11,7 @@
     <StackPanel>
         <!-- Таблиця зі списком валют -->
         <DataGrid x:Name="CurrenciesGrid"
+              ItemsSource="{Binding Currencies}"
               Width="800"
               AutoGenerateColumns="False"
               HorizontalAlignment="Center"
@@ -32,8 +33,8 @@
         </Grid>
 
 
-
-        <Changes_buttons:Changes DataContext="{Binding CurrencyVM}" Width ="400" Height="60"/>
+    
+        <Changes_buttons:Changes DataContext="{Binding}" Width ="400" Height="60"/>
 
 
 
