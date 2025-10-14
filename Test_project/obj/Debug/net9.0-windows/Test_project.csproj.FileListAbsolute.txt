@@ -27,3 +27,4 @@ C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_project.csproj.
 C:\Tests\Test_project\Test_project\bin\Debug\net9.0-windows\CommunityToolkit.Mvvm.dll
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\Changes_buttons\Changes.baml
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_pro.9DA6EF3E.Up2Date
+C:\Tests\Test_project\Test_project\bin\Debug\net9.0-windows\Newtonsoft.Json.dll

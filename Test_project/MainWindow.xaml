@@ -35,8 +35,12 @@
 
     
         <Changes_buttons:Changes DataContext="{Binding}" Width ="400" Height="60"/>
-
-
+        
+        <Grid>
+            <Button Content="Отримати ціну BTC" Width="200" Height="40" Margin="10" Command="{Binding LoadBTCCommand}"/>
+        </Grid>
+        
+        
 
     </StackPanel>
 
