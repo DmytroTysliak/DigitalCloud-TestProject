@@ -18,7 +18,6 @@ namespace Test_project
 {
     public partial class MainWindow : Window
     {
-        private CoinMarketCapService _service;
         public CurrencyViewModel CurrencyVM { get; set; }
         public MainWindow()
         {
@@ -56,5 +55,36 @@ namespace Test_project
                 detailsWindow.ShowDialog();
             }
         }
+
+        private void LightThemeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var lightTheme = new ResourceDictionary
+            {
+                Source = new Uri("/Themes/LightTheme.xaml", UriKind.Relative)
+            };
+            ApplyTheme(lightTheme);
+        }
+
+        private void DarkThemeButton_Click(object sender, RoutedEventArgs e)
+        { 
+            var darkTheme = new ResourceDictionary
+            {
+                Source = new Uri("/Themes/DarkTheme.xaml", UriKind.Relative)
+            };
+            ApplyTheme(darkTheme);
+        }
+
+        private void ApplyTheme(ResourceDictionary theme)
+        {
+            var existingThemes = Application.Current.Resources.MergedDictionaries
+                .Where(d => d.Source != null && d.Source.OriginalString.Contains("Theme"))
+                .ToList();
+
+            foreach (var t in existingThemes)
+                Application.Current.Resources.MergedDictionaries.Remove(t);
+
+            Application.Current.Resources.MergedDictionaries.Add(theme);
+        }
+
     }
 }

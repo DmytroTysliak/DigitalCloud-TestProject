@@ -30,3 +30,6 @@ C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Test_pro.9DA6EF3E.Up
 C:\Tests\Test_project\Test_project\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\CurrencyDetails\CurrencyDetailsView.g.cs
 C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\View\CurrencyDetails\CurrencyDetailsView.baml
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Themes\DarkTheme.baml
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\Themes\LightTheme.baml
+C:\Tests\Test_project\Test_project\obj\Debug\net9.0-windows\App.baml
