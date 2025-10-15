@@ -20,14 +20,19 @@ namespace Test_project.ViewModels
     public class CurrencyViewModel : INotifyPropertyChanged
     {
         private readonly CoinMarketCapService _service;
+        private Currency _selectedCurrency;
+
+        private string _searchText;
+        
+
         public ObservableCollection<Currency> Currencies { get; set; }
  
 
         public ICommand AddCurrencyCommand { get; }
         public ICommand DeleteCurrencyCommand { get; }
-        public ICommand EditCurrencyCommand { get; }
         public ICommand RefreshCurrencyCommand { get; }
-        public ICommand LoadBTCCommand { get; }
+        public ICommand SearchCurrencyCommand { get; }
+
 
         public CurrencyViewModel()
         {
@@ -35,12 +40,14 @@ namespace Test_project.ViewModels
             Currencies = new ObservableCollection<Currency>();
             LoadTopCoinsAsync();
 
-
+            SearchCurrencyCommand = new RelayCommand(SearchCurrency);
             AddCurrencyCommand = new RelayCommand(Add_Currency);
-            DeleteCurrencyCommand = new RelayCommand<Currency>(Delete_Currency);
-            EditCurrencyCommand = new RelayCommand<Currency>(Edit_Currency);
             RefreshCurrencyCommand = new AsyncRelayCommand(Refresh_CurrencyAsync);
-            LoadBTCCommand = new AsyncRelayCommand(LoadBTCAsync);
+            DeleteCurrencyCommand = new RelayCommand(() =>
+            {
+                if (SelectedCurrency != null)
+                    Currencies.Remove(SelectedCurrency);
+            });
         }
         private async Task LoadTopCoinsAsync()
         {
@@ -67,9 +74,22 @@ namespace Test_project.ViewModels
             }
         }
 
-        private async Task LoadBTCAsync()
+        private void SearchCurrency()
         {
-            await LoadCurrencyAsync("BTC");
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                MessageBox.Show("❌ Введіть назву або символ валюти.");
+                return;
+            }
+
+            var found = Currencies.FirstOrDefault(c =>
+                c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                c.Code.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+
+            if (found != null)
+                MessageBox.Show($"Знайдено: {found.Name} ({found.Code}) - {found.Price}$");
+            else
+                MessageBox.Show("Валюта не знайдена.");
         }
 
         private async Task LoadCurrencyAsync(string symbol)
@@ -97,12 +117,6 @@ namespace Test_project.ViewModels
                 Currencies.Remove(currency);
         }
 
-        public void Edit_Currency(Currency currency)
-        {
-            if (currency != null)
-                currency.Price += 1;
-        }
-
         public async Task Refresh_CurrencyAsync()
         {
             using HttpClient client = new HttpClient();
@@ -119,7 +133,24 @@ namespace Test_project.ViewModels
                 foreach (var item in data)
                     Currencies.Add(new Currency(item.Name, item.Symbol.ToUpper(), item.Current_Price));
             });
-
+        }
+        public Currency SelectedCurrency
+        {
+            get => _selectedCurrency;
+            set
+            {
+                _selectedCurrency = value;
+                OnPropertyChanged(nameof(SelectedCurrency));
+            }
+        }
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

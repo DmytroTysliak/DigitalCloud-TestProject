@@ -19,7 +19,6 @@ namespace Test_project.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-
         [JsonPropertyName("market_data")]
         public MarketData MarketData { get; set; }
 
@@ -34,7 +33,8 @@ namespace Test_project.Models
         public Dictionary<string, decimal> CurrentPrice { get; set; }
 
         [JsonPropertyName("price_change")]
-        public decimal PriceChange { get; set; }
+        public double PriceChange24h { get; set; }
+
         [JsonPropertyName("total_volume")]
         public Dictionary<string, decimal> TotalVolume { get; set; }
     }

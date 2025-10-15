@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Tests\Test_project\Test_project\App.xaml
-3-108033948
+4-899335147
 
-14-1355217639
+17-426731043
 202-1379714752
-MainWindow.xaml;View\Changes_buttons\Changes.xaml;View\Search_button\Search.xaml;
+MainWindow.xaml;View\Changes_buttons\Changes.xaml;View\CurrencyDetails\CurrencyDetailsView.xaml;View\Search_button\Search.xaml;
 
 False
 

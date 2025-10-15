@@ -13,7 +13,8 @@ namespace Test_project.Models
         private string _name;
         private string _code;
         private decimal _price;
-        private string _errorMessage;
+        private string _errorMessage; 
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,6 +25,8 @@ namespace Test_project.Models
             _price = price;
             ValidatePrice();
         }
+        
+        
 
         private void ValidatePrice()
         {
