@@ -20,28 +20,34 @@ namespace Test_project.ViewModels
     public class CurrencyViewModel : INotifyPropertyChanged
     {
         private readonly CoinMarketCapService _service;
+        private Currency _selectedCurrency;
+
+        private string _searchText;
+        
+
         public ObservableCollection<Currency> Currencies { get; set; }
  
 
         public ICommand AddCurrencyCommand { get; }
         public ICommand DeleteCurrencyCommand { get; }
-        public ICommand EditCurrencyCommand { get; }
         public ICommand RefreshCurrencyCommand { get; }
-        public ICommand LoadBTCCommand { get; }
+        public ICommand SearchCurrencyCommand { get; }
+
 
         public CurrencyViewModel()
         {
             _service = new CoinMarketCapService("7ce93d4944f545f8a455469609320716");
             Currencies = new ObservableCollection<Currency>();
-            MessageBox.Show("Конструктор ViewModel викликано");
             LoadTopCoinsAsync();
 
-
+            SearchCurrencyCommand = new RelayCommand(SearchCurrency);
             AddCurrencyCommand = new RelayCommand(Add_Currency);
-            DeleteCurrencyCommand = new RelayCommand<Currency>(Delete_Currency);
-            EditCurrencyCommand = new RelayCommand<Currency>(Edit_Currency);
-            RefreshCurrencyCommand = new RelayCommand(Refresh_Currency);
-            LoadBTCCommand = new AsyncRelayCommand(LoadBTCAsync);
+            RefreshCurrencyCommand = new AsyncRelayCommand(Refresh_CurrencyAsync);
+            DeleteCurrencyCommand = new RelayCommand(() =>
+            {
+                if (SelectedCurrency != null)
+                    Currencies.Remove(SelectedCurrency);
+            });
         }
         private async Task LoadTopCoinsAsync()
         {
@@ -68,9 +74,22 @@ namespace Test_project.ViewModels
             }
         }
 
-        private async Task LoadBTCAsync()
+        private void SearchCurrency()
         {
-            await LoadCurrencyAsync("BTC");
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                MessageBox.Show("❌ Введіть назву або символ валюти.");
+                return;
+            }
+
+            var found = Currencies.FirstOrDefault(c =>
+                c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                c.Code.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+
+            if (found != null)
+                MessageBox.Show($"Знайдено: {found.Name} ({found.Code}) - {found.Price}$");
+            else
+                MessageBox.Show("Валюта не знайдена.");
         }
 
         private async Task LoadCurrencyAsync(string symbol)
@@ -98,18 +117,40 @@ namespace Test_project.ViewModels
                 Currencies.Remove(currency);
         }
 
-        public void Edit_Currency(Currency currency)
+        public async Task Refresh_CurrencyAsync()
         {
-            if (currency != null)
-                currency.Price += 1;
-        }
+            using HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MyApp/1.0)");
+            string url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
+            var json = await client.GetStringAsync(url);
 
-        public void Refresh_Currency()
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var data = JsonSerializer.Deserialize<List<CoinGeko>>(json, options);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Currencies.Clear();
+                foreach (var item in data)
+                    Currencies.Add(new Currency(item.Name, item.Symbol.ToUpper(), item.Current_Price));
+            });
+        }
+        public Currency SelectedCurrency
         {
-            Currencies.Clear();
-            Currencies.Add(new Currency("US dollar", "USD", 1.0m));
-            Currencies.Add(new Currency("Euro", "EUR", 0.92m));
-            Currencies.Add(new Currency("Japanese Yen", "JPY", 144.5m));
+            get => _selectedCurrency;
+            set
+            {
+                _selectedCurrency = value;
+                OnPropertyChanged(nameof(SelectedCurrency));
+            }
+        }
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

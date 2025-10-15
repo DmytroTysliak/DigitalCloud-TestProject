@@ -5,6 +5,9 @@
     <Compile Update="View\Changes_buttons\Changes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\CurrencyDetails\CurrencyDetailsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Search_button\Search.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="Test_project.View.CurrencyDetails.CurrencyDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Test_project.View.CurrencyDetails"
+             mc:Ignorable="d" 
+             Title="CoinInfo"  d:DesignHeight="450" d:DesignWidth="600">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="{Binding Currency.Name}" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Currency.Symbol}" FontSize="18" Foreground="Gray" Margin="0,0,0,20"/>
+            
+            <TextBlock Text="24h Change (%):" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Currency.MarketData.PriceChange24h}" Margin="0,0,0,20"/>
+
+            <TextBlock Text="Markets: " FontWeight="Bold" Margin="0,10,0,5"/>
+            <ItemsControl ItemsSource="{Binding Currency.Tickers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,2">
+                            <TextBlock Text="{Binding Market.Name}" Width="200"/>
+                            <TextBlock Text="{Binding LastPrice, StringFormat={}{0:F2} USD}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

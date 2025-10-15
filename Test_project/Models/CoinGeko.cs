@@ -18,10 +18,6 @@ namespace Test_project.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
-
         [JsonPropertyName("current_price")]
         public decimal Current_Price { get; set; }
 
