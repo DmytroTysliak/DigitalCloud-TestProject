@@ -33,14 +33,13 @@ namespace Test_project.ViewModels
         {
             _service = new CoinMarketCapService("7ce93d4944f545f8a455469609320716");
             Currencies = new ObservableCollection<Currency>();
-            MessageBox.Show("Конструктор ViewModel викликано");
             LoadTopCoinsAsync();
 
 
             AddCurrencyCommand = new RelayCommand(Add_Currency);
             DeleteCurrencyCommand = new RelayCommand<Currency>(Delete_Currency);
             EditCurrencyCommand = new RelayCommand<Currency>(Edit_Currency);
-            RefreshCurrencyCommand = new RelayCommand(Refresh_Currency);
+            RefreshCurrencyCommand = new AsyncRelayCommand(Refresh_CurrencyAsync);
             LoadBTCCommand = new AsyncRelayCommand(LoadBTCAsync);
         }
         private async Task LoadTopCoinsAsync()
@@ -104,12 +103,23 @@ namespace Test_project.ViewModels
                 currency.Price += 1;
         }
 
-        public void Refresh_Currency()
+        public async Task Refresh_CurrencyAsync()
         {
-            Currencies.Clear();
-            Currencies.Add(new Currency("US dollar", "USD", 1.0m));
-            Currencies.Add(new Currency("Euro", "EUR", 0.92m));
-            Currencies.Add(new Currency("Japanese Yen", "JPY", 144.5m));
+            using HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MyApp/1.0)");
+            string url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
+            var json = await client.GetStringAsync(url);
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var data = JsonSerializer.Deserialize<List<CoinGeko>>(json, options);
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Currencies.Clear();
+                foreach (var item in data)
+                    Currencies.Add(new Currency(item.Name, item.Symbol.ToUpper(), item.Current_Price));
+            });
+
         }
     }
 }
