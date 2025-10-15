@@ -77,7 +77,7 @@ namespace Test_project.View.Search_button {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Test_project;component/view/search_button/search.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Test_project;V1.0.0.0;component/view/search_button/search.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Search_button\Search.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -77,7 +77,7 @@ namespace Test_project.View.Changes_buttons {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Test_project;component/view/changes_buttons/changes.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Test_project;V1.0.0.0;component/view/changes_buttons/changes.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\View\Changes_buttons\Changes.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
